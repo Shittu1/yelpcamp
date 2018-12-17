@@ -3,14 +3,17 @@ const router = express.Router();
 const User = require("../models/user");
 const passport = require("passport");
 
+// root route
 router.get("/", (req, res) => {
 	res.render("landing");
 });
 
+// show signup from route
 router.get("/register", (req, res) => {
 	res.render("register");
 });
 
+// signup from logic
 router.post("/register", (req, res) => {
 	let newUser = new User({ username: req.body.username });
 	User.register(newUser, req.body.password, (err, user) => {
