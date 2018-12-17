@@ -1,0 +1,44 @@
+<% include ../partials/header %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">Yelp Camp</p>
+            <ul class="list-group">
+                <li class="list-group-item active">Info 1</li>
+                <li class="list-group-item">Info 2</li>
+                <li class="list-group-item">Info 3</li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <div class="thumbnail">
+                <img class="img-responsive" src="<%= campground.image %>" alt="">
+            </div>
+            <div class="caption-full">
+                <h4 class="pull-right">N 9.00</h4>
+                <h4><a href="">
+                        <%= campground.name %></a></h4>
+                <p>
+                    <%= campground.description %>
+                </p>
+            </div>
+            <div class="well" style="height:auto">
+                <div class="text-right">
+                    <a class="btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Add a comment</a>
+                </div>
+                <hr />
+                <% campground.comments.forEach((comment) => { %>
+                    <strong><%= comment.author %></strong>
+                    <span class="pull-right">10 days ago</span>
+                    <p>
+                        <%= comment.text %>
+                    </p>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<% include ../partials/footer %>
