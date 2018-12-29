@@ -5,8 +5,11 @@ const path = require("path");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const localStrategy = require("passport-local");
+const methodOverride = require("method-override");
 const passportLocalMongoose = require("passport-local-mongoose");
 const session = require("express-session");
+
+// requiring routes
 const commentRoutes = require("./routes/comments");
 const campgroundRoutes = require("./routes/campgrounds");
 const indexRoutes = require("./routes/index");
@@ -15,12 +18,13 @@ require("dotenv").config();
 const User = require("./models/user");
 const seedDB = require("./seed");
 
-seedDB();
+// seedDB();  //seed the database
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true });
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
+app.use(methodOverride("_method"));
 
 // PASSPORT CONFIGURATION
 app.use(session({
